@@ -19,7 +19,7 @@ public class Game {
                 try {
                     var input = sc.nextLine();
                     var move = Move.fromString(input);
-                    move.exec(this.board);
+                    this.board.movePiece(move);
                     break;
                 } catch (Exception e) {
                     System.out.println("Invalid move: " + e.getMessage());

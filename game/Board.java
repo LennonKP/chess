@@ -42,15 +42,7 @@ public class Board {
     }
 
     public void movePiece(Piece piece, Move move) {
-        var target = this.getPiece(move.getLinhaFinal(), move.getColunaFinal());
-        if (target instanceof Piece) {
-            capturedPieces.add(target);
-        }
 
-        this.board[move.getLinhaFinal()][move.getColunaFinal()] = piece;
-        this.board[move.getLinhaInicial()][move.getColunaInicial()] = null;
-
-        this.changeTurn();
     }
 
     public void print() {
@@ -96,5 +88,27 @@ public class Board {
 
         board[7][4] = new pieces.King(Color.WHITE, 7, 4);
         board[0][4] = new pieces.King(Color.BLACK, 0, 4);
+    }
+
+    public void movePiece(Move move) throws Exception {
+        var piece = this.getPiece(move.getLinhaInicial(), move.getColunaInicial());
+        if (piece == null) {
+            throw new Exception("No Piece in the informed start location");
+        }
+        if (piece.getColor() != this.currentPlayer) {
+            throw new Exception("Its not possible to move your oponent pieces");
+        }
+
+        piece.move(move, this);
+
+        var target = this.getPiece(move.getLinhaFinal(), move.getColunaFinal());
+        if (target != null) {
+            capturedPieces.add(target);
+        }
+
+        this.board[move.getLinhaFinal()][move.getColunaFinal()] = piece;
+        this.board[move.getLinhaInicial()][move.getColunaInicial()] = null;
+
+        this.changeTurn();
     }
 }
