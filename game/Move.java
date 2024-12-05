@@ -33,7 +33,6 @@ public class Move {
         this.colunaFinal = colunaFinal;
     }
 
-
     public static Move fromString(String string) throws Exception {
         String[] parts = string.trim().split(" ");
         if (parts.length != 2) {

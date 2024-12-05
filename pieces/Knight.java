@@ -13,9 +13,15 @@ public class Knight extends Piece {
 
     @Override
     public boolean isValidMove(Move move, Board board) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isValidMove'");
-    }
+        int startX = move.getLinhaInicial();
+        int startY = move.getColunaInicial();
+        int endX = move.getLinhaFinal();
+        int endY = move.getColunaFinal();
 
+        int dx = Math.abs(endX - startX);
+        int dy = Math.abs(endY - startY);
+
+        return (dx == 2 && dy == 1) || (dx == 1 && dy == 2);
+    }
 
 }
