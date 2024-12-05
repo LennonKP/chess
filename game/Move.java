@@ -33,18 +33,6 @@ public class Move {
         this.colunaFinal = colunaFinal;
     }
 
-    public void exec(Board board) throws Exception {
-        var piece = board.getPiece(this.getLinhaInicial(), this.getColunaInicial());
-        if (piece == null) {
-            throw new Exception("No Piece in the informed start location");
-        }
-
-        // if (!piece.isValidMove(null, board)) {
-
-        // }
-
-        board.movePiece(piece, this);
-    }
 
     public static Move fromString(String string) throws Exception {
         String[] parts = string.trim().split(" ");
