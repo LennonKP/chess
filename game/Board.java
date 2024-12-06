@@ -41,10 +41,6 @@ public class Board {
         this.currentPlayer = this.currentPlayer == Color.WHITE ? Color.BLACK : Color.WHITE;
     }
 
-    public void movePiece(Piece piece, Move move) {
-
-    }
-
     public void print() {
         for (int i = 0; i < board.length; i++) {
             var pieces = this.board[i];
@@ -103,6 +99,10 @@ public class Board {
 
         var target = this.getPiece(move.getLinhaFinal(), move.getColunaFinal());
         if (target != null) {
+            if (target.getClass().getName().equals("King")) {
+                this.gameOver = true;
+                return;
+            }
             capturedPieces.add(target);
         }
 

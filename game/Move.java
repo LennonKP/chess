@@ -1,9 +1,4 @@
 package game;
-
-import java.util.Arrays;
-
-import pieces.Piece;
-
 public class Move {
     private int colunaInicial;
     private int colunaFinal;
