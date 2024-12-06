@@ -8,27 +8,35 @@ public class Game {
 
     public Game() {
         this.sc = new Scanner(System.in);
-        this.board = new Board();
         this.start();
     }
 
     public void start() {
-        while (!this.board.isGameOver()) {
-            System.out.println(this.board.getCurrentPlayer() + "'s turn");
-            while (true) {
-                try {
-                    var input = sc.nextLine();
-                    var move = Move.fromString(input);
-                    this.board.movePiece(move);
-                    break;
-                } catch (Exception e) {
-                    System.out.println("Invalid move: " + e.getMessage());
-                    System.out.println("Try Again...");
+        boolean playAgain = true;
+        while (playAgain) {
+            this.board = new Board();
+            System.out.println("New game started!");
+            while (!this.board.isGameOver()) {
+                System.out.println(this.board.getCurrentPlayer() + "'s turn");
+                while (true) {
+                    try {
+                        var input = sc.nextLine();
+                        var move = Move.fromString(input);
+                        this.board.movePiece(move);
+                        break;
+                    } catch (Exception e) {
+                        System.out.println("Invalid move: " + e.getMessage());
+                        System.out.println("Try Again...");
+                    }
                 }
+
+                this.board.print();
             }
 
-            this.board.print();
+            System.out.println("Play again? (y/n)");
+            playAgain = sc.nextLine().trim().equalsIgnoreCase("y");
         }
+        System.out.println("Thanks for playing!");
     }
 
 }
