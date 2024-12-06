@@ -16,7 +16,7 @@ public class Game {
         while (playAgain) {
             this.board = new Board();
             System.out.println("New game started!");
-            while (!this.board.isGameOver()) {
+            while (this.board.getWinner() == null) {
                 System.out.println(this.board.getCurrentPlayer() + "'s turn");
                 while (true) {
                     try {

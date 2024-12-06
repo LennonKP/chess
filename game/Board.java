@@ -9,12 +9,8 @@ import pieces.Piece;
 public class Board {
     private List<Piece> capturedPieces;
     private Color currentPlayer;
-    private boolean gameOver;
+    private Color winner;
     private pieces.Piece[][] board;
-
-    public boolean isGameOver() {
-        return gameOver;
-    }
 
     public Color getCurrentPlayer() {
         return currentPlayer;
@@ -28,9 +24,16 @@ public class Board {
         return this.board[row][column];
     }
 
+    public Color getWinner() {
+        return winner;
+    }
+
+    private void setWinner(Color winner) {
+        this.winner = winner;
+    }
+
     public Board() {
         this.currentPlayer = Color.WHITE;
-        this.gameOver = false;
         this.board = new pieces.Piece[8][8];
         this.capturedPieces = new ArrayList<Piece>();
         this.initializePieces();
@@ -99,8 +102,9 @@ public class Board {
 
         var target = this.getPiece(move.getLinhaFinal(), move.getColunaFinal());
         if (target != null) {
-            if (target.getClass().getName().equals("King")) {
-                this.gameOver = true;
+            System.out.println(target.getClass().getName());
+            if (target.getClass().getName().equals("pieces.King")) {
+                this.setWinner(this.currentPlayer);
                 return;
             }
             capturedPieces.add(target);
@@ -111,4 +115,5 @@ public class Board {
 
         this.changeTurn();
     }
+
 }
